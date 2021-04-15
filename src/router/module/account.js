@@ -1,7 +1,7 @@
-const OuterLayout = () => import('@/layouts/outerLayout')
-const Login = () => import('@/views/account/login/login')
-const Register = () => import('@/views/account/register/register')
-const Forget = () => import('@/views/account/forget/forget')
+const OuterLayout = () => import('@/views/account/')
+const Login = () => import('@/views/account/login/')
+const Register = () => import('@/views/account/register/')
+const Forget = () => import('@/views/account/forget/')
 
 const route = {
   path: '/account',

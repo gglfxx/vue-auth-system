@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '@/store'
 import VueRouter from 'vue-router'
 import login from '../views/account/login/login'
 
@@ -16,4 +17,20 @@ const router = new VueRouter({
   routes
 })
 
+// 导航守卫
+router.beforeEach((to, from, next) => {
+  const token = sessionStorage.getItem('token')
+  const outerPaths = ['/account/login', '/account/register', '/account/forget']
+  // token不存在(说明没登录),但是路由将要进入系统内部，自动跳到登录页面。
+  if (!token && !outerPaths.includes(to.path)) {
+    next('/account/login')
+  } else {
+    // 如果token存在(说明已登录)，但是角色不存在(说明没获取到用户信息)，这时应该获取用户信息
+    if (token && !store.getters.userInfo.roles) {
+
+    } else {
+      next()
+    }
+  }
+})
 export default router
