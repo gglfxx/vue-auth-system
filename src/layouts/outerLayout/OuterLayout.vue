@@ -1,8 +1,7 @@
 <template>
   <div class="outer-layout">
     <div class="outer-layout__header">
-      <svg-icon icon-name="logo" />
-      <span>后台管理系统</span>
+      <span>统一认证管理平台</span>
     </div>
 
     <div class="outer-layout__page">
@@ -13,14 +12,14 @@
 <style lang="scss" scoped>
   .outer-layout {
     min-height: 100vh;
-    background: url(~@/assets/images/layout/outer_bg.jpg) no-repeat fixed center;
+    background: url(~@/assets/images/layout/background.svg) no-repeat fixed center;
     background-size: cover;
 
     .outer-layout__header {
       padding-top: 60px;
       text-align: center;
       font-size: 32px;
-      color: #fff;
+      color: #66b1ff;
     }
 
     .outer-layout__page {

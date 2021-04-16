@@ -17,7 +17,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-checkbox v-model="loginForm.rememberPwd">记住账号</el-checkbox>
+        <el-checkbox v-model="loginForm.rememberPwd">记住密码</el-checkbox>
         <div class="register">
           <router-link to="/account/forget">忘记密码?</router-link>
           <span>没有账号?</span>
@@ -107,7 +107,7 @@ $primary-text-color:#303133;
   .login__header {
     font-size: 22px;
     text-align: center;
-    color: #fff;
+    color: #66b1ff;
   }
 
   .login__body {
@@ -123,7 +123,7 @@ $primary-text-color:#303133;
 
     .register {
       float: right;
-      color: #fff;
+      color: #66b1ff;
     }
   }
 }
@@ -141,11 +141,6 @@ $primary-text-color:#303133;
       padding-right: 35px;
     }
   }
-  .el-form-item__label,
-  .el-checkbox__label {
-    color: #fff;
-  }
-
   .el-button {
     display: block;
     width: 100%;
