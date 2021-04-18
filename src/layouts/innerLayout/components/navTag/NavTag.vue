@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Scrollbar from '@/components/scrollbar'
+import Scrollbar from '@/components/scrollbar/Scrollbar'
 import bus from '@/utils/bus'
 
 export default {
@@ -39,7 +39,7 @@ export default {
     }
   },
   created () {
-    this.addTag(this.$route);
+    this.addTag(this.$route)
     bus.$on('closeTag', (path) => {
       const tagIndex = this.tagList.findIndex(tag => tag.path === path)
       this.tagList.splice(tagIndex, 1)
@@ -65,10 +65,10 @@ export default {
     // 关闭标签
     handleClose (index) {
       // taglist中只有首页时不关闭首页
-      if (this.tagList.length === 1 && this.tagList[0].path === '/dashboard') return false;
+      if (this.tagList.length === 1 && this.tagList[0].path === '/dashboard') return false
       const delTag = this.tagList.splice(index, 1)[0]
       // 判断关闭的tag的下一个tag存不存在，存在就跳到下一个tag，不存在就跳到上一个tag。
-      const toTag = this.tagList[index] ? this.tagList[index] : this.tagList[index - 1];
+      const toTag = this.tagList[index] ? this.tagList[index] : this.tagList[index - 1]
       if (toTag) {
         // 只有关闭的是当前页面才进行跳转
         delTag.path === this.$route.path && this.$router.push(toTag.path)

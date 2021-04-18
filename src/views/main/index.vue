@@ -18,14 +18,14 @@
 </template>
 
 <script>
-import Statistic from './components/Statistic'
-import LineChart from './components/LineChart'
-import TodoList from './components/TodoList'
-import ProgressBar from './components/ProgressBar'
-import NewGoods from './components/NewGoods'
+import Statistic from './Statistic'
+import LineChart from './LineChart'
+import TodoList from './/TodoList'
+import ProgressBar from './ProgressBar'
+import NewGoods from './NewGoods'
 
 export default {
-  name: 'home',
+  name: 'authSys',
   components: {
     Statistic,
     LineChart,

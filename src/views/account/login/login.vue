@@ -17,7 +17,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-checkbox v-model="loginForm.rememberPwd">记住密码</el-checkbox>
+        <el-checkbox v-model="loginForm.rememberPwd">记住账号</el-checkbox>
         <div class="register">
           <router-link to="/account/forget">忘记密码?</router-link>
           <span>没有账号?</span>
@@ -66,8 +66,7 @@ export default {
   },
   methods: {
     showPwd () {
-      // eslint-disable-next-line eqeqeq
-      this.passwordType = this.passwordType == 'password' ? 'text' : 'password'
+      this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
     },
     handleLogin () {
       this.loginLoading = true

@@ -21,8 +21,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import FullScreen from '@/components/fullScreen'
-import ThemeSetting from '@/components/setting/themeSetting'
+import FullScreen from '@/components/fullScreen/FullScreen'
+import ThemeSetting from '@/components/setting/themeSetting/ThemeSetting'
 import { resetRouter } from '@/router'
 
 export default {

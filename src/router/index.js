@@ -10,12 +10,12 @@ Vue.use(VueRouter)
 // 静态路由
 const staticRouteMap = [{
   path: '/',
-  redirect: '/home',
+  redirect: '/authSys',
   meta: {
     hiddenInMenu: true
   }
 },
-accountRoute,authSysRoute
+accountRoute, authSysRoute
 ]
 
 // 需要通过角色动态控制的路由表

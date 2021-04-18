@@ -1,4 +1,4 @@
-const InnerLayout = () => import('@/layouts/innerLayout')
+const InnerLayout = () => import('@/layouts/innerLayout/InnerLayout')
 const AuthSys = () => import('@/views/main/index')
 
 // 主页设置

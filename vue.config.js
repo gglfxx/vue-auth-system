@@ -19,5 +19,14 @@ module.exports = {
       .end()
       .use('file-loader')
       .loader('file-loader')
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: '@import "@/assets/styles/variable.scss";' // 引入全局变量
+      }
+
+    }
+
   }
 }
