@@ -76,7 +76,7 @@ export default {
             username: this.loginForm.username,
             password: encryptByDES(this.loginForm.password, '123456')
           }
-          this.$store.dispatch('login', account).then(() => {
+          this.$store.dispatch('Login', account).then(() => {
             // eslint-disable-next-line handle-callback-err
             this.$router.replace('/').catch(err => {})
             this.loginLoading = false

@@ -4,7 +4,7 @@ import store from '@/store'
 
 class Service {
   baseConfig = {
-    baseURL: '/Webapi',
+    baseURL: 'webApi/',
     headers: {},
     timeout: 8000
   }
@@ -27,7 +27,7 @@ class Service {
   initInstance () {
     this.instance = axios.create(this.baseConfig)
     this.setReqInterceptors()
-    this.setResnterceptors()
+    this.setResInterceptors()
   }
 
   // 设置请求头
@@ -53,7 +53,7 @@ class Service {
   }
 
   // 响应拦截器
-  setResnterceptors = () => {
+  setResInterceptors = () => {
     this.instance.interceptors.response.use(
       res => {
         const { code, data, msg } = res.data
