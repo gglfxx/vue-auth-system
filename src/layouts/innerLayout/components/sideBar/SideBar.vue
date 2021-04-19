@@ -59,7 +59,6 @@ export default {
     // 获取需要在侧边菜单显示的路由表
     getMenuRouteMap (routes) {
       const menuRouteMap = routes.filter(route => {
-
         // 如果父路由设置了hiddenInMenu：true，则它以及它的子路由都不能通过菜单栏访问
         if (route.meta.hiddenInMenu) {
           return false
@@ -101,7 +100,7 @@ export default {
     getMenu (routes) {
       return this.menuRouteMap.map(route => this.getMenuItem(route))
     }
-  },
+  }
 }
 </script>
 

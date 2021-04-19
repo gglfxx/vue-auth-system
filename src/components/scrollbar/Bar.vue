@@ -66,7 +66,7 @@ export default {
     scrollSize: {
       type: Number,
       default: 0
-    },
+    }
   },
   data () {
     return {
@@ -93,7 +93,7 @@ export default {
     },
     scrollSize () {
       this.handleUpdate()
-    },
+    }
   },
   mounted () {
     this.track = this.$refs.track
@@ -112,6 +112,7 @@ export default {
         track,
         size,
         vertical,
+        // eslint-disable-next-line no-unused-vars
         bar
       } = this
       if (vertical) {
@@ -224,8 +225,8 @@ export default {
       // 浏览器原生滚动条是点一下，则滚动一定距离，这里直接滚动到点击的位置。
       const position = event[this.bar.client] - event.target.getBoundingClientRect()[this.bar.position] - this.thumbSize / 2
       this.handleContentScroll(position)
-    },
-  },
+    }
+  }
 }
 </script>
 

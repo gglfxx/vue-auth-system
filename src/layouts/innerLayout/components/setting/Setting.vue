@@ -33,7 +33,7 @@ export default {
     return {
       // 初始打开抽屉，不然el-drawer组件不会渲染，其中的设置也不会生效
       drawer: true,
-      tagVisible: this.$store.getters.tagVisible,
+      tagVisible: this.$store.getters.tagVisible
     }
   },
   mounted () {

@@ -58,7 +58,7 @@ export default {
           title: route.meta.title,
           path: route.path,
           name: route.name,
-          noCache: route.meta.noCache,
+          noCache: route.meta.noCache
         })
       }
     },
@@ -96,7 +96,6 @@ export default {
   box-sizing: border-box;
   padding: 5px 10px;
   white-space: nowrap;
-
 
   .nav-tag__item {
     padding: 5px 10px;
