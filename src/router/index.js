@@ -3,6 +3,7 @@ import store from '@/store'
 import VueRouter from 'vue-router'
 import accountRoute from './module/account.js'
 import authSysRoute from './module/authSys.js'
+import config from '@/config'
 import { deepClone } from '@/utils/core'
 
 Vue.use(VueRouter)
@@ -43,17 +44,10 @@ const resetRouter = () => {
   router.matcher = newRouter.matcher
 }
 
-// 路由权限表
-// 如果配置了一级路由，则它之下的所有子路由都可访问。
-const permission = {
-  admin: ['Icon', 'Chart', 'Form', 'Table', 'Excel', 'Tab', 'AMap', 'Error', 'Permission', 'User', 'Article', 'Pdf', 'Other', '404'],
-  guest: ['Icon', 'Chart', 'Form', 'Table', 'Excel', 'Tab', 'AMap', 'Error', 'Other', '404'],
-  editor: ['Article', 'Error', 'Other', '404']
-}
 // 从路由权限表中获取到角色可访问的路由名称
 const getRouteNames = (roles) => {
   let routeNames = []
-  // const permission = permission
+  const permission = config.permission
   // eslint-disable-next-line no-return-assign
   roles.forEach(role => routeNames = [...new Set([...routeNames, ...permission[role]])])
   return routeNames

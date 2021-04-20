@@ -20,10 +20,10 @@ const account = {
   actions: {
     // 登录获取token
     Login ({ commit }, loginInfo) {
-      const username = loginInfo.username.trim()
-      const password = loginInfo.password
+      // const username = loginInfo.username.trim()
+      // const password = loginInfo.password
       return new Promise((resolve, reject) => {
-        api.account.login({
+        /*  api.account.login({
           username,
           password
         }).then(res => {
@@ -33,21 +33,30 @@ const account = {
           resolve()
         }).catch((error) => {
           reject(error)
-        })
+        }) */
+        sessionStorage.setItem('token', JSON.stringify(loginInfo))
+        commit('SET_TOKEN', loginInfo)
+        resolve()
       })
     },
     // 通过token获取用户信息
     // 实际开发token放在请求头的Authorization中
     GetUserInfo ({ commit, state }) {
       return new Promise((resolve, reject) => {
-        api.account.getUserInfo({
+        /* api.account.getUserInfo({
           token: state.token
         }).then(res => {
           commit('SET_USER_INFO', res)
           resolve(res)
         }).catch((error) => {
           reject(error)
-        })
+        }) */
+        const res = {
+          username: 'admin',
+          roles: ['admin']
+        }
+        commit('SET_USER_INFO', res)
+        resolve(res)
       })
     },
     logout ({ commit, state }) {
