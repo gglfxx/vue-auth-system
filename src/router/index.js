@@ -6,6 +6,9 @@ import authSysRoute from './module/authSys.js'
 import config from '@/config'
 import { deepClone } from '@/utils/core'
 
+// 用户
+import systemRoute from './module/system.js'
+
 Vue.use(VueRouter)
 
 // 静态路由
@@ -21,6 +24,7 @@ accountRoute, authSysRoute
 
 // 需要通过角色动态控制的路由表
 const dynamicRouteMap = [
+  systemRoute
 ]
 
 const createRouter = () => new VueRouter({
