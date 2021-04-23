@@ -64,8 +64,14 @@ export default {
     },
     // 关闭标签
     handleClose (index) {
-      // taglist中只有首页时不关闭首页
-      if (this.tagList.length === 1 && this.tagList[0].path === '/dashboard') return false
+      // tagList中只有首页时不关闭首页
+      if (this.tagList.length === 1 && this.tagList[0].path === '/authSys/index') {
+        this.$message({
+          message: '不能关闭了哦',
+          type: 'warning'
+        })
+        return false
+      }
       const delTag = this.tagList.splice(index, 1)[0]
       // 判断关闭的tag的下一个tag存不存在，存在就跳到下一个tag，不存在就跳到上一个tag。
       const toTag = this.tagList[index] ? this.tagList[index] : this.tagList[index - 1]

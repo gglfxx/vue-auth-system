@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import store from '@/store'
 import VueRouter from 'vue-router'
-import accountRoute from './module/account.js'
-import authSysRoute from './module/authSys.js'
+import accountRoute from './modules/account.js'
+import authSysRoute from './modules/authSys.js'
 import config from '@/config'
 import { deepClone } from '@/utils/core'
 
 // 用户
-import systemRoute from './module/system.js'
+import systemRoute from './modules/system.js'
+// 个人中心
+import mineRoute from './modules/mine'
 
 Vue.use(VueRouter)
 
@@ -24,7 +26,7 @@ accountRoute, authSysRoute
 
 // 需要通过角色动态控制的路由表
 const dynamicRouteMap = [
-  systemRoute
+  systemRoute, mineRoute
 ]
 
 const createRouter = () => new VueRouter({

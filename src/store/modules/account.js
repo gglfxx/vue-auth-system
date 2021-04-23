@@ -20,10 +20,10 @@ const account = {
   actions: {
     // 登录获取token
     Login ({ commit }, loginInfo) {
-      // const username = loginInfo.username.trim()
-      // const password = loginInfo.password
+      const username = loginInfo.username.trim()
+      const password = loginInfo.password
       return new Promise((resolve, reject) => {
-        /*  api.account.login({
+        api.account.login({
           username,
           password
         }).then(res => {
@@ -33,10 +33,7 @@ const account = {
           resolve()
         }).catch((error) => {
           reject(error)
-        }) */
-        sessionStorage.setItem('token', JSON.stringify(loginInfo))
-        commit('SET_TOKEN', loginInfo)
-        resolve()
+        })
       })
     },
     // 通过token获取用户信息
@@ -53,6 +50,11 @@ const account = {
         }) */
         const res = {
           username: 'admin',
+          name: '管理员',
+          gender: '男',
+          avatar: 'https://s2.ax1x.com/2019/08/02/edRc1P.jpg',
+          mobilePhone: '13812345678',
+          email: '13812345678@qq.com',
           roles: ['admin']
         }
         commit('SET_USER_INFO', res)
@@ -61,7 +63,7 @@ const account = {
     },
     logout ({ commit, state }) {
       return new Promise((resolve, reject) => {
-        api.account.logout({
+        /*  api.account.logout({
           token: state.token
         }).then(res => {
           commit('SET_TOKEN', '')
@@ -71,7 +73,12 @@ const account = {
           resolve()
         }).catch((error) => {
           reject(error)
-        })
+        }) */
+        commit('SET_TOKEN', '')
+        commit('SET_USER_INFO', {})
+        commit('SET_ROUTE_MAP', [])
+        sessionStorage.clear()
+        resolve()
       })
     }
   }
