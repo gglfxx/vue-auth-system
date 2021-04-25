@@ -1,4 +1,4 @@
-import api from '@/api'
+// import api from '@/api'
 
 const account = {
   state: {
@@ -23,7 +23,11 @@ const account = {
       const username = loginInfo.username.trim()
       const password = loginInfo.password
       return new Promise((resolve, reject) => {
-        api.account.login({
+        const token = username + password
+        sessionStorage.setItem('token', token)
+        commit('SET_TOKEN', token)
+        resolve()
+        /* api.account.login({
           username,
           password
         }).then(res => {
@@ -33,7 +37,7 @@ const account = {
           resolve()
         }).catch((error) => {
           reject(error)
-        })
+        }) */
       })
     },
     // 通过token获取用户信息

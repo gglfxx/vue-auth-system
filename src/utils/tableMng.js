@@ -1,5 +1,4 @@
 /* 基础数据表管理 */
-
 // 表名。方便使用的时候查看
 const TABLE_NAME_MAP = {
   gender: 'gender',

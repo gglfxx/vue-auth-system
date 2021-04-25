@@ -8,6 +8,10 @@
           <el-switch v-model="tagVisible"/>
         </el-form-item>
 
+        <el-form-item label="侧边栏 Logo：">
+          <el-switch v-model="sidebarLogo"/>
+        </el-form-item>
+
         <el-form-item label="系统风格：">
           <style-setting/>
         </el-form-item>
@@ -33,7 +37,8 @@ export default {
     return {
       // 初始打开抽屉，不然el-drawer组件不会渲染，其中的设置也不会生效
       drawer: true,
-      tagVisible: true
+      tagVisible: this.$store.getters.tagVisible,
+      sidebarLogo: this.$store.getters.sidebarLogo
     }
   },
   mounted () {

@@ -40,6 +40,9 @@ export default {
     sideCollapse () {
       return this.$store.getters.sideCollapse
     },
+    sidebarLogo () {
+      return this.$store.getters.sidebarLogo
+    },
     routeMap () {
       return this.$store.getters.routeMap
     },

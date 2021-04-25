@@ -5,6 +5,7 @@ const setting = {
     theme: localStorage.getItem('theme') || config.theme,
     sideCollapse: localStorage.getItem('sideCollapse') ? !!+localStorage.getItem('sideCollapse') : config.sideCollapse, // Boolean(Number('1'))
     tagVisible: localStorage.getItem('tagVisible') ? !!+localStorage.getItem('tagVisible') : config.tagVisible,
+    sidebarLogo: localStorage.getItem('sidebarLogo') ? !!+localStorage.getItem('sidebarLogo') : config.sidebarLogo,
     style: localStorage.getItem('style') || config.style,
     size: localStorage.getItem('size') || config.size
   },
