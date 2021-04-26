@@ -5,6 +5,7 @@ const getters = {
   cachePages: state => state.cache.cachePages,
   theme: state => state.setting.theme,
   sideCollapse: state => state.setting.sideCollapse,
+  sidebarLogo: state => state.setting.sidebarLogo,
   tagVisible: state => state.setting.tagVisible,
   style: state => state.setting.style,
   size: state => state.setting.size
