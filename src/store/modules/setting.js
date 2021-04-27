@@ -7,7 +7,8 @@ const setting = {
     tagVisible: localStorage.getItem('tagVisible') ? !!+localStorage.getItem('tagVisible') : config.tagVisible,
     sidebarLogo: localStorage.getItem('sidebarLogo') ? !!+localStorage.getItem('sidebarLogo') : config.sidebarLogo,
     style: localStorage.getItem('style') || config.style,
-    size: localStorage.getItem('size') || config.size
+    size: localStorage.getItem('size') || config.size,
+    showSettings: localStorage.getItem('showSettings') ? !!+localStorage.getItem('showSettings') : config.showSettings
   },
   mutations: {
     SET_THEME (state, theme) {
@@ -29,6 +30,14 @@ const setting = {
     SET_SIZE (state, size) {
       state.size = size
       localStorage.setItem('size', size)
+    },
+    SET_LOGO (state, sidebarLogo) {
+      state.sidebarLogo = sidebarLogo
+      localStorage.setItem('sidebarLogo', sidebarLogo)
+    },
+    SET_SETTINGS (state, showSettings) {
+      state.showSettings = showSettings
+      localStorage.setItem('showSettings', showSettings)
     }
   }
 }

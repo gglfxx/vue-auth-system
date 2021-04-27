@@ -1,26 +1,24 @@
 <template>
-  <div class="setting">
-    <i class="el-icon-setting setting__icon" @click="drawer = true"> </i>
-
-    <el-drawer title="系统界面设置" :visible.sync="drawer" size="300px">
-      <el-form label-width="100px">
-        <el-form-item label="导航标签：">
-          <el-switch v-model="tagVisible"/>
-        </el-form-item>
-
-        <el-form-item label="侧边栏 Logo：">
-          <el-switch v-model="sidebarLogo"/>
-        </el-form-item>
-
-        <el-form-item label="系统风格：">
-          <style-setting/>
-        </el-form-item>
-
-        <el-form-item label="元素大小：">
-          <size-setting/>
-        </el-form-item>
-      </el-form>
-    </el-drawer>
+  <div class="drawer-container">
+    <div>
+      <h3 class="drawer-title">系统布局配置</h3>
+      <div class="drawer-item">
+        <span>导航标签</span>
+        <el-switch v-model="tagVisible" class="drawer-switch"/>
+      </div>
+      <div class="drawer-item">
+        <span>侧边栏 Logo</span>
+        <el-switch v-model="sidebarLogo" class="drawer-switch"/>
+      </div>
+      <div class="drawer-item">
+        <span>系统风格</span>
+        <style-setting/>
+      </div>
+      <div class="drawer-item">
+        <span>元素大小</span>
+        <size-setting/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -34,35 +32,54 @@ export default {
     SizeSetting
   },
   data () {
-    return {
-      // 初始打开抽屉，不然el-drawer组件不会渲染，其中的设置也不会生效
-      drawer: true,
-      tagVisible: this.$store.getters.tagVisible,
-      sidebarLogo: this.$store.getters.sidebarLogo
-    }
+    return {}
   },
-  mounted () {
-    this.drawer = false
-  },
-  watch: {
-    tagVisible (value) {
-      this.$store.commit('SET_TAG_VISIBLE', value)
+  computed: {
+    tagVisible: {
+      get () {
+        return this.$store.state.tagVisible
+      },
+      set (val) {
+        this.$store.dispatch('SET_TAG_VISIBLE', {
+          key: 'fixedHeader',
+          value: val
+        })
+      }
+    },
+    sidebarLogo: {
+      get () {
+        return this.$store.state.sidebarLogo
+      },
+      set (val) {
+        this.$store.commit('SET_LOGO', val)
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.setting {
-  position: relative;
+.drawer-container {
+  padding: 24px;
+  font-size: 14px;
+  line-height: 1.5;
+  word-wrap: break-word;
 
-  .setting__icon {
-    position: absolute;
-    left: -40px;
-    line-height: 50px;
-    font-size: 28px;
-    color: #fff;
-    cursor: pointer;
+  .drawer-title {
+    margin-bottom: 12px;
+    color: rgba(0, 0, 0, .85);
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .drawer-item {
+    color: rgba(0, 0, 0, .65);
+    font-size: 14px;
+    padding: 12px 0;
+  }
+
+  .drawer-switch {
+    float: right
   }
 }
 </style>

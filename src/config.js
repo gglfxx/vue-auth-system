@@ -17,6 +17,8 @@ const config = {
   sideCollapse: false,
   // 是否启用标签导航
   tagVisible: true,
+  // 是否展开设置
+  showSettings: true,
   // 是否展示侧边栏logo
   sidebarLogo: true,
   // 系统风格
