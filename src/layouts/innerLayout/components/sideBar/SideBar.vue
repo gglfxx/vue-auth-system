@@ -1,10 +1,8 @@
 <template>
-  <div class="side-bar">
-
-    <logo/>
-
+  <div :class="{'has-logo':showLogo}">
+    <logo v-if="showLogo" />
     <!-- 侧边导航菜单 -->
-    <scrollbar>
+    <scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activePath"
         :collapse="sideCollapse"
@@ -40,7 +38,7 @@ export default {
     sideCollapse () {
       return this.$store.getters.sideCollapse
     },
-    sidebarLogo () {
+    showLogo () {
       return this.$store.getters.sidebarLogo
     },
     routeMap () {

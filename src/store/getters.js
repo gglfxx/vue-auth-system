@@ -7,7 +7,6 @@ const getters = {
   sideCollapse: state => state.setting.sideCollapse,
   sidebarLogo: state => state.setting.sidebarLogo,
   tagVisible: state => state.setting.tagVisible,
-  showSettings: state => state.settings.showSettings,
   style: state => state.setting.style,
   size: state => state.setting.size
 }

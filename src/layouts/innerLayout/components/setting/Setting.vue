@@ -37,20 +37,27 @@ export default {
   computed: {
     tagVisible: {
       get () {
-        return this.$store.state.tagVisible
+        return this.$store.getters.tagVisible
       },
       set (val) {
-        this.$store.dispatch('SET_TAG_VISIBLE', {
-          key: 'fixedHeader',
+        /* this.$store.dispatch('setting/changeSetting', {
+          key: 'SET_TAG_VISIBLE',
           value: val
-        })
+        }) */
+        this.$store.commit('SET_TAG_VISIBLE', val)
       }
     },
     sidebarLogo: {
       get () {
-        return this.$store.state.sidebarLogo
+        return this.$store.getters.sidebarLogo
       },
       set (val) {
+        // 异步操作请求
+        /* this.$store.dispatch('setting/changeSetting', {
+          key: 'SET_LOGO',
+          value: val
+        }) */
+        // 同步操作
         this.$store.commit('SET_LOGO', val)
       }
     }

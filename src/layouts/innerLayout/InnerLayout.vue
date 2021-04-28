@@ -1,7 +1,7 @@
 <template>
-  <div class="inner-layout">
+  <div :class="classObj" class="inner-layout" >
     <!-- 侧边菜单 -->
-    <side-bar/>
+    <side-bar class="sidebar-container" />
 
     <div class="inner-layout__main">
       <!-- 顶部工具栏 -->
@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- 系统界面设置 -->
-    <right-panel  v-if="showSettings">
+    <right-panel>
       <settings />
     </right-panel>
   </div>
@@ -27,7 +27,7 @@
 
 <script>
 import { HeaderBar, SideBar, NavTag, Settings, RightPanel } from './components'
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -38,14 +38,18 @@ export default {
     RightPanel
   },
   computed: {
-    ...mapState({
-      showSettings: state => state.setting.showSettings
-    }),
     ...mapGetters(['tagVisible', 'cachePages']),
     // 创建文章以及所有的编辑文章都是共用的ArticleEdit组件,所以对应的路由不能使用keep-alive缓存。
     // 同时它们使用的也是动态路由，在这些路由之间切换时也需要响应路由参数的变化，当路由参数变化时需要重新渲染。
     key () {
       return this.$route.path
+    },
+    classObj () {
+      return {
+        hideSidebar: !this.$store.getters.sideCollapse,
+        openSidebar: this.$store.getters.sideCollapse,
+        withoutAnimation: false
+      }
     }
   }
 }
@@ -60,6 +64,7 @@ export default {
   .inner-layout__main {
     width: 100%;
     overflow-x: hidden;
+    margin-left: 210px;
     background-color: #f0f2f5;
 
     .inner-layout__page {
