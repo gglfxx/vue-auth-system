@@ -9,7 +9,7 @@
         :key="tag.path"
         @dblclick="handleClose(index)">
         <router-link class="link" :to="tag.path">{{ tag.title }}</router-link>
-        <i class="el-icon-circle-close close" @click="handleClose(index)"></i>
+        <i v-if="!isAffix(tag)" class="el-icon-circle-close close" @click="handleClose(index)"></i>
       </div>
     </div>
   </scrollbar>
@@ -49,6 +49,9 @@ export default {
     isTagActive (path) {
       return this.$route.path === path
     },
+    isAffix (tag) {
+      return tag.affix
+    },
     // 添加标签
     addTag (route) {
       const tagExist = this.tagList.some(item => item.path === route.path)
@@ -56,6 +59,7 @@ export default {
       if (!tagExist && route.name) {
         this.tagList.push({
           title: route.meta.title,
+          affix: route.meta.affix,
           path: route.path,
           name: route.name,
           noCache: route.meta.noCache
@@ -65,13 +69,7 @@ export default {
     // 关闭标签
     handleClose (index) {
       // tagList中只有首页时不关闭首页
-      if (this.tagList.length === 1 && this.tagList[0].path === '/authSys/index') {
-        this.$message({
-          message: '不能关闭了哦',
-          type: 'warning'
-        })
-        return false
-      }
+      if (this.tagList.length === 1 && this.tagList[0].path === '/authSys/index') return false
       const delTag = this.tagList.splice(index, 1)[0]
       // 判断关闭的tag的下一个tag存不存在，存在就跳到下一个tag，不存在就跳到上一个tag。
       const toTag = this.tagList[index] ? this.tagList[index] : this.tagList[index - 1]
@@ -113,7 +111,20 @@ export default {
     & + .nav-tag__item {
       margin-left: 10px;
     }
-
+    &.active {
+      background-color: #42b983;
+      color: #fff;
+      &::before {
+        content: '';
+        background: #fff;
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        position: relative;
+        margin-right: 3px;
+      }
+    }
     .link {
       display: inline-block;
       font-size: 12px;

@@ -41,7 +41,6 @@ export default {
     show (value) {
       if (value && !this.clickNotClose) {
         this.addEventClick()
-        this.$store.commit('SET_SETTINGS', value)
       }
       if (value) {
         addClass(document.body, 'showRightPanel')

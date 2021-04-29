@@ -12,11 +12,7 @@
       </div>
       <div class="drawer-item">
         <span>系统风格</span>
-        <style-setting/>
-      </div>
-      <div class="drawer-item">
-        <span>元素大小</span>
-        <size-setting/>
+        <style-setting class="drawer-switch" style="margin-top: 5px;"/>
       </div>
     </div>
   </div>
@@ -24,12 +20,10 @@
 
 <script>
 import StyleSetting from '@/components/setting/styleSetting/StyleSetting'
-import SizeSetting from '@/components/setting/sizeSetting/SizeSetting'
 
 export default {
   components: {
-    StyleSetting,
-    SizeSetting
+    StyleSetting
   },
   data () {
     return {}

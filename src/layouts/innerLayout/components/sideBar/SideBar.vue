@@ -1,8 +1,8 @@
 <template>
-  <div :class="{'has-logo':showLogo}">
-    <logo v-if="showLogo" />
+  <div class="side-bar">
+    <logo />
     <!-- 侧边导航菜单 -->
-    <scrollbar wrap-class="scrollbar-wrapper">
+    <scrollbar>
       <el-menu
         :default-active="activePath"
         :collapse="sideCollapse"

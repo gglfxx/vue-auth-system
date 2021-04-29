@@ -29,6 +29,9 @@ export default {
 
 <style lang="scss" scoped>
 .menu-item {
+  .svg-icon {
+    margin-right: 16px;
+  }
   .menu-icon {
     vertical-align: middle;
     font-size: 18px;

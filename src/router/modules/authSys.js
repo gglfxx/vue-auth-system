@@ -16,7 +16,8 @@ const route = {
     component: AuthSys,
     meta: {
       title: '首页',
-      activePath: '/authSys'
+      activePath: '/authSys',
+      affix: true
     }
   }]
 }

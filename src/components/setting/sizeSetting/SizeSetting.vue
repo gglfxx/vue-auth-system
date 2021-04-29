@@ -1,28 +1,48 @@
 <template>
-  <!-- ElementUI元素大小设置 -->
-  <el-select v-model="size" :key="sizeSelectKey">
-    <el-option label="big" value="default"></el-option>
-    <el-option label="medium" value="medium"></el-option>
-    <el-option label="small" value="small"></el-option>
-    <el-option label="mini" value="mini"></el-option>
-  </el-select>
+  <el-dropdown trigger="click" @command="handleSetSize">
+    <div>
+      <svg-icon icon-name="size" />
+    </div>
+    <el-dropdown-menu slot="dropdown">
+      <el-dropdown-item v-for="item of options" :key="item.value" :disabled="size===item.value" :command="item.value">
+        {{
+          item.label }}
+      </el-dropdown-item>
+    </el-dropdown-menu>
+  </el-dropdown>
 </template>
-
 <script>
 export default {
   data () {
     return {
-      size: this.$store.getters.size,
-      sizeSelectKey: 0
+      sizeSelectKey: 0,
+      options: [
+        { label: 'big', value: 'default' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'Small', value: 'small' },
+        { label: 'Mini', value: 'mini' }
+      ]
     }
   },
-  watch: {
-    size (value) {
+  computed: {
+    size () {
+      return this.$store.getters.size
+    }
+  },
+  methods: {
+    handleSetSize (value) {
       this.$ELEMENT.size = value
       this.sizeSelectKey++
       this.$store.commit('SET_SIZE', value)
       this.$store.commit('SET_CACHE_PAGES', [])
-      this.$router.replace('/reload')
+      this.refreshView()
+      this.$message({
+        message: 'Switch Size Success',
+        type: 'success'
+      })
+    },
+    refreshView () {
+      // this.$router.replace('/')
     }
   }
 }

@@ -4,8 +4,10 @@
        @click="handleCollapse"></i>
     <div class="header-bar__menu">
       <full-screen/>
-      <theme-setting/>
-
+      <theme-setting />
+      <el-tooltip content="Global Size" effect="dark" placement="bottom">
+        <size-setting id="size-setting" class="right-menu-item hover-effect" />
+      </el-tooltip>
       <el-dropdown @command="handleCommand">
         <img class="avatar" :src="userInfo.avatar" alt/>
         <el-dropdown-menu slot="dropdown">
@@ -24,11 +26,13 @@ import { mapGetters } from 'vuex'
 import FullScreen from '@/components/fullScreen/FullScreen'
 import ThemeSetting from '@/components/setting/themeSetting/ThemeSetting'
 import { resetRouter } from '@/router'
+import SizeSetting from '@/components/setting/sizeSetting/SizeSetting'
 
 export default {
   components: {
     FullScreen,
-    ThemeSetting
+    ThemeSetting,
+    SizeSetting
   },
   data () {
     return {
@@ -95,6 +99,23 @@ export default {
       height: 40px;
       border-radius: 50%;
       cursor: pointer;
+    }
+  }
+  .right-menu-item {
+    display: inline-block;
+    padding: 0 8px;
+    height: 100%;
+    font-size: 18px;
+    color: #5a5e66;
+    vertical-align: text-bottom;
+    margin-bottom: 5px;
+    &.hover-effect {
+      cursor: pointer;
+      transition: background .3s;
+
+      &:hover {
+        background: rgba(0, 0, 0, .025)
+      }
     }
   }
 }
