@@ -1,0 +1,11 @@
+#app {
+  .hideSidebar {
+    .side-bar {
+      width: $sideBarHideWidth !important;
+    }
+
+    .inner-layout__main {
+      margin-left: $sideBarHideWidth;
+    }
+  }
+}

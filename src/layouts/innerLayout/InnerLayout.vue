@@ -1,5 +1,5 @@
 <template>
-  <div class="inner-layout" >
+  <div :class="classObj" class="inner-layout" >
     <!-- 侧边菜单 -->
     <side-bar />
 
@@ -43,6 +43,12 @@ export default {
     // 同时它们使用的也是动态路由，在这些路由之间切换时也需要响应路由参数的变化，当路由参数变化时需要重新渲染。
     key () {
       return this.$route.path
+    },
+    classObj () {
+      return {
+        hideSidebar: this.$store.getters.sideCollapse,
+        openSidebar: !this.$store.getters.sideCollapse
+      }
     }
   }
 }
@@ -57,6 +63,7 @@ export default {
   .inner-layout__main {
     width: 100%;
     overflow-x: hidden;
+    margin-left:$sideBarWidth;
     background-color: #f0f2f5;
 
     .inner-layout__page {

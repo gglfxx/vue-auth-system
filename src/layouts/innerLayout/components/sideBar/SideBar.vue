@@ -1,6 +1,6 @@
 <template>
-  <div class="side-bar">
-    <logo />
+  <div class="side-bar" :class="{'has-logo':showLogo}">
+    <logo v-if="showLogo" :collapse="isCollapse"/>
     <!-- 侧边导航菜单 -->
     <scrollbar>
       <el-menu
@@ -9,6 +9,7 @@
         :unique-opened="false"
         router
         background-color="#545c64"
+        :collapse-transition="false"
         text-color="#fff">
         <menu-item v-for="menu in menuList" :key="menu.path" :config="menu"/>
       </el-menu>
@@ -108,11 +109,21 @@ export default {
 <style lang="scss" scoped>
 .side-bar {
   background-color: #545c64;
-
-  .scrollbar-wrap {
-    height: calc(100% - 48px);
+  transition: width 0.28s;
+  width: $sideBarWidth !important;
+  height: 100%;
+  position: fixed;
+  font-size: 0px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1001;
+  overflow: hidden;
+  &.has-logo {
+    .scrollbar-wrap {
+      height: calc(100% - 50px);
+    }
   }
-
   .el-menu {
     height: 100%;
     border-right: none;
