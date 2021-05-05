@@ -3,13 +3,15 @@
     <i class="header-bar__collapse" :class="sideCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'"
        @click="handleCollapse"></i>
     <div class="header-bar__menu">
-      <full-screen/>
-      <theme-setting />
-      <el-tooltip content="Global Size" effect="dark" placement="bottom">
+      <full-screen class="right-menu-item"/>
+      <theme-setting class="right-theme-item"/>
+      <el-tooltip content="布局大小" effect="dark" placement="bottom">
         <size-setting id="size-setting" class="right-menu-item hover-effect" />
       </el-tooltip>
-      <el-dropdown @command="handleCommand">
-        <img class="avatar" :src="userInfo.avatar" alt/>
+      <el-dropdown @command="handleCommand" class="avatar-container right-menu-item">
+        <div class="avatar-wrapper">
+          <img class="avatar" :src="userInfo.avatar" alt/>
+        </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/mine">
             <el-dropdown-item>个人中心</el-dropdown-item>
@@ -63,42 +65,50 @@ export default {
 <style lang="scss" scoped>
 .header-bar {
   height: 50px;
-  line-height: 50px;
-  padding-right: 40px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
   0 2px 1px -1px rgba(0, 0, 0, 0.12);
   background-color: var(--theme);
+  overflow: hidden;
+  position: relative;
 
   .header-bar__collapse {
-    color: #fff;
-    font-size: 24px;
-    margin-left: 16px;
+    line-height: 46px;
+    height: 100%;
+    float: left;
+    font-size:24px;
     cursor: pointer;
-
+    transition: background .3s;
+    -webkit-tap-highlight-color:transparent;
+    padding: 0px 15px;
     &:hover {
       color: $auxiliary-text-color;
     }
   }
-
+  .right-theme-item {
+    padding: 0 8px;
+  }
   .el-color-picker {
-    transform: translate(-10px, -3px);
+    transform: translate(0, -8px);
   }
 
   .header-bar__menu {
-    box-sizing: border-box;
     float: right;
-    height: 50px;
-    padding: 5px;
+    height: 100%;
+    line-height: 50px;
 
-    .el-dropdown {
-      height: 40px;
+    .avatar-wrapper {
+      margin-top: 5px;
+      position: relative;
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
     }
-
-    .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
+    .avatar-container{
+      margin-right: 30px;
     }
   }
   .right-menu-item {
@@ -106,7 +116,7 @@ export default {
     padding: 0 8px;
     height: 100%;
     font-size: 18px;
-    color: #5a5e66;
+    color: #fff;
     vertical-align: text-bottom;
     margin-bottom: 5px;
     &.hover-effect {

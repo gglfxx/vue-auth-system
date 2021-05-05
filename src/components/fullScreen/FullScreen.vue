@@ -1,7 +1,9 @@
 <template>
   <!-- 页面全屏 -->
   <el-tooltip effect="dark" :content="isFullScreen ? '取消全屏' : '全屏浏览'" placement="bottom">
-    <i class="el-icon-rank" @click="handleFullScreen"></i>
+    <a href='javascript:;' @click="handleFullScreen">
+      <svg-icon :icon-name="isFullScreen?'exit-fullscreen':'fullscreen'" />
+    </a>
   </el-tooltip>
 </template>
 
@@ -45,13 +47,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.el-icon-rank {
-  font-size: 30px;
-  color: #fff;
-  transform: rotateZ(45deg);
-  transform-origin: 15px -10px;
-  cursor: pointer;
-}
-</style>

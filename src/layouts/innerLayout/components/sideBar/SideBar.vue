@@ -1,6 +1,6 @@
 <template>
   <div class="side-bar" :class="{'has-logo':showLogo}">
-    <logo v-if="showLogo" :collapse="isCollapse"/>
+    <logo v-if="showLogo" :collapse="sideCollapse"/>
     <!-- 侧边导航菜单 -->
     <scrollbar>
       <el-menu
