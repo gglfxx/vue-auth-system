@@ -17,7 +17,7 @@ import G2 from '@antv/g2'
 import api from '@/api'
 
 const TYPE_NAME_MAP = {
-  visite: '访问量',
+  visites: '访问量',
   user: '用户数量',
   goods: '商品数量',
   comment: '评论数量'
@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       chartName: '访问量',
-      chartType: 'visite',
+      chartType: 'visites',
       weekChart: {},
       monthChart: {},
       weekData: {},

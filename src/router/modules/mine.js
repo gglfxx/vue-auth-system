@@ -1,5 +1,5 @@
 const InnerLayout = () => import('@/layouts/innerLayout/InnerLayout')
-const Mine = () => import('@/views/mine')
+const Mine = () => import('@/views/mine/index')
 
 const route = {
   path: '/mine',
