@@ -1,5 +1,5 @@
 <template>
-  <el-row class="dashboard-line-chart" :gutter="30">
+  <el-row class="line-chart" :gutter="30">
     <el-col :lg="12" :sm="24">
       <p class="title">周{{ chartName }}增长趋势图</p>
       <div id="weekChartContainer"></div>
@@ -17,10 +17,10 @@ import G2 from '@antv/g2'
 import api from '@/api'
 
 const TYPE_NAME_MAP = {
-  visites: '访问量',
-  user: '用户数量',
-  goods: '商品数量',
-  comment: '评论数量'
+  visits: '访问量',
+  messages: '评论数量',
+  purchases: '商品数量',
+  shopping: '购买数量'
 }
 
 export default {
@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       chartName: '访问量',
-      chartType: 'visites',
+      chartType: 'visits',
       weekChart: {},
       monthChart: {},
       weekData: {},
@@ -43,8 +43,8 @@ export default {
   watch: {
     // 折叠或展开菜单栏的时候，图表宽度不会跟着变，需要重建。
     sideCollapse () {
-      // Dashboard页面使用keep-alive做了缓存，如果当前不在Dashbord页面，折叠/展开菜单会出现container不存在的情况
-      if (this.$route.path === '/dashboard/index') {
+      // 主页使用keep-alive做了缓存，如果当前不在主页，折叠/展开菜单会出现container不存在的情况
+      if (this.$route.path === '/authSys/index') {
         // eslint-disable-next-line no-unused-vars
         const timer = setTimeout(() => {
           this.weekChart.destroy()
@@ -130,7 +130,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dashboard-line-chart {
+.line-chart {
   margin-bottom: 20px;
 
   .title {

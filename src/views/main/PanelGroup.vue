@@ -1,54 +1,15 @@
 <template>
   <el-row :gutter="40" class="panel-group">
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('visites')">
-        <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-name="peoples" class="card-panel-icon" />
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" v-for="grid in grids" :key="grid.name">
+      <div class="card-panel" @click="handleSetLineChartData(grid.type)">
+        <div class="card-panel-icon-wrapper" :class="grid.className">
+          <svg-icon :icon-name="grid.icon" class="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            访问量
+            {{ grid.name }}
           </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('messages')">
-        <div class="card-panel-icon-wrapper icon-message">
-          <svg-icon icon-name="message" class="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            消息
-          </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('purchases')">
-        <div class="card-panel-icon-wrapper icon-money">
-          <svg-icon icon-name="money" class="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            购买数量
-          </div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('shoppings')">
-        <div class="card-panel-icon-wrapper icon-shopping">
-          <svg-icon icon-name="shopping" class="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            商品数量
-          </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :endVal="grid.number" :duration="grid.duration" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -57,15 +18,57 @@
 
 <script>
 import CountTo from 'vue-count-to'
-
+// import api from '@/api'
 export default {
   components: {
     CountTo
   },
+  created () {
+    this.getGridData()
+  },
+  data () {
+    return {
+      grids: [{
+        type: 'visits',
+        icon: 'peoples',
+        className: 'icon-people',
+        name: '访问量',
+        number: 102400,
+        duration: 2600
+      }, {
+        type: 'messages',
+        icon: 'message',
+        className: 'icon-message',
+        name: '评论数量',
+        duration: 3000,
+        number: 81212
+      }, {
+        type: 'purchases',
+        icon: 'money',
+        className: 'icon-money',
+        name: '商品数量',
+        duration: 3200,
+        number: 9280
+      }, {
+        type: 'shopping',
+        icon: 'shopping',
+        className: 'icon-shopping',
+        name: '购买数量',
+        duration: 3600,
+        number: 13600
+      }]
+    }
+  },
   methods: {
     handleSetLineChartData (type) {
       this.$emit('handleSetLineChartData', type)
-    }
+    }/*,
+    async getGridData () {
+      const data = await api.dashboard.getGridData()
+      this.grids.forEach((item, index) => {
+        item.number = Object.values(data)[index]
+      })
+    } */
   }
 }
 </script>
