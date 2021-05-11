@@ -1,7 +1,7 @@
 import service from '@/utils/service'
+// 主页
+export const getGridData = () => service.get('/authSys/grid')
 
-export const getGridData = () => service.get('/dashboard/grid')
+export const getLineChartData = (data) => service.get('/authSys/lineChart', data)
 
-export const getLineChartData = (data) => service.get('/dashboard/lineChart', data)
-
-export const getTodoListData = () => service.get('/dashboard/todoList')
+export const getTodoListData = () => service.get('/authSys/todoList')

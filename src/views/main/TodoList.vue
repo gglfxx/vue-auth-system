@@ -31,8 +31,38 @@
 </template>
 
 <script>
-import api from '@/api'
-
+// import api from '@/api'
+const tasks = [{
+  isCompleted: false,
+  content: '待办事项 待办事项 待办事项 待办事项 '
+}, {
+  isCompleted: false,
+  content: '待办事项 待办事项 待办事项 待办事项 '
+}, {
+  isCompleted: false,
+  content: '待办事项 待办事项 '
+}, {
+  isCompleted: true,
+  content: '待办事项 '
+}, {
+  isCompleted: false,
+  content: '待办事项 待办事项 待办事项 '
+}, {
+  isCompleted: true,
+  content: '待办事项 待办事项 待办事项 待办事项 待办事项 '
+}, {
+  isCompleted: false,
+  content: '待办事项 待办事项 待办事项 待办事项 '
+}, {
+  isCompleted: true,
+  content: '待办事项 待办事项 '
+}, {
+  isCompleted: true,
+  content: '待办事项 待办事项 待办事项 '
+}, {
+  isCompleted: false,
+  content: '待办事项 待办事项 '
+}]
 export default {
   data () {
     return {
@@ -44,7 +74,8 @@ export default {
   },
   methods: {
     async getTask () {
-      const data = await api.dashboard.getTodoListData()
+      // const data = await api.authSys.getTodoListData()
+      const data = tasks
       this.taskData = data
     },
     handleAdd () {

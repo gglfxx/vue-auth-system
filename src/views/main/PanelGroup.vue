@@ -24,7 +24,7 @@ export default {
     CountTo
   },
   created () {
-    this.getGridData()
+    // this.getGridData()
   },
   data () {
     return {
