@@ -3,14 +3,14 @@
     <panel-group @handleSetLineChartData="handleChangeType" />
     <line-chart :statistic-type="statisticType" />
 
-    <el-row :gutter="20">
-      <el-col :span="8">
+    <el-row :gutter="8">
+      <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 24}" :lg="{span: 12}" :xl="{span: 10}" style="padding-right:8px;margin-bottom:30px;">
+        <transaction-table />
+      </el-col>
+      <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
         <todo-list />
       </el-col>
-      <el-col :span="8">
-        <progress-bar />
-      </el-col>
-      <el-col :span="8">
+      <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 8}" style="margin-bottom:30px;">
         <new-goods />
       </el-col>
     </el-row>
@@ -20,8 +20,8 @@
 <script>
 import PanelGroup from './PanelGroup'
 import LineChart from './LineChart'
-import TodoList from './/TodoList'
-import ProgressBar from './ProgressBar'
+import TodoList from './TodoList/index'
+import TransactionTable from './TransactionTable'
 import NewGoods from './NewGoods'
 export default {
   name: 'authSys',
@@ -29,7 +29,7 @@ export default {
     PanelGroup,
     LineChart,
     TodoList,
-    ProgressBar,
+    TransactionTable,
     NewGoods
   },
   data () {

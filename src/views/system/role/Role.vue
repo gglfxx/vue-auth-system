@@ -32,7 +32,7 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'Edit Role':'New Role'">
+    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'编辑角色':'新建角色'">
       <el-form :model="role" label-width="80px" label-position="left">
         <el-form-item label="Name">
           <el-input v-model="role.name" placeholder="Role Name"/>

@@ -25,17 +25,21 @@ export default {
   },
   data () {
     return {
-      tagList: []
+      visible: false,
+      top: 0,
+      left: 0,
+      selectedTag: {},
+      affixTags: []
+    }
+  },
+  computed: {
+    tagList () {
+      return this.$store.getters.visitedViews
     }
   },
   watch: {
     $route (route) {
       this.addTag(route)
-    },
-    tagList () {
-      // 缓存页面
-      const cachePages = this.tagList.filter(item => !item.noCache).map(item => item.name)
-      this.$store.commit('SET_CACHE_PAGES', cachePages)
     }
   },
   created () {
@@ -64,6 +68,7 @@ export default {
           name: route.name,
           noCache: route.meta.noCache
         })
+        this.$store.dispatch('cache/addView', route)
       }
     },
     // 关闭标签

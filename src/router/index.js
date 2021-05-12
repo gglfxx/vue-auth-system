@@ -5,6 +5,7 @@ import accountRoute from './modules/account.js'
 import authSysRoute from './modules/authSys.js'
 import config from '@/config'
 import { deepClone } from '@/utils/core'
+import InnerLayout from '@/layouts/innerLayout/InnerLayout'
 
 // 用户
 import systemRoute from './modules/system.js'
@@ -21,7 +22,21 @@ const staticRouteMap = [{
     hiddenInMenu: true
   }
 },
-accountRoute, authSysRoute
+accountRoute, authSysRoute,
+{
+  // 跳转到目标地址
+  path: '/redirect',
+  component: InnerLayout,
+  meta: {
+    hiddenInMenu: true
+  },
+  children: [
+    {
+      path: '/redirect/:path(.*)',
+      component: () => import('@/views/redirect/index')
+    }
+  ]
+}
 ]
 
 // 需要通过角色动态控制的路由表
