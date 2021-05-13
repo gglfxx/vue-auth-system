@@ -3,20 +3,20 @@ const AuthSys = () => import('@/views/main/index')
 
 // 主页设置
 const route = {
-  path: '/authSys',
+  path: '/',
   component: InnerLayout,
-  redirect: '/authSys/index',
+  redirect: '/authSys',
   meta: {
     title: '首页',
     icon: 'home'
   },
   children: [{
     name: 'AuthSys',
-    path: '/authSys/index',
+    path: 'authSys',
     component: AuthSys,
     meta: {
       title: '首页',
-      activePath: '/authSys',
+      icon: 'home',
       affix: true
     }
   }]

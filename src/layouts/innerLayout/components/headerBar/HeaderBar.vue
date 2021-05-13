@@ -2,6 +2,7 @@
   <div class="header-bar">
     <i class="header-bar__collapse" :class="sideCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'"
        @click="handleCollapse"></i>
+    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
     <div class="header-bar__menu">
       <full-screen class="right-menu-item"/>
       <theme-setting class="right-theme-item"/>
@@ -25,6 +26,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Breadcrumb from '@/components/Breadcrumb'
 import FullScreen from '@/components/fullScreen/FullScreen'
 import ThemeSetting from '@/components/setting/themeSetting/ThemeSetting'
 import { resetRouter } from '@/router'
@@ -34,7 +36,8 @@ export default {
   components: {
     FullScreen,
     ThemeSetting,
-    SizeSetting
+    SizeSetting,
+    Breadcrumb
   },
   data () {
     return {
@@ -65,9 +68,8 @@ export default {
 <style lang="scss" scoped>
 .header-bar {
   height: 50px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-  0 2px 1px -1px rgba(0, 0, 0, 0.12);
-  background-color: var(--theme);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 1px -1px rgba(0, 0, 0, 0.1);
+  background: #fff;
   overflow: hidden;
   position: relative;
 
@@ -116,7 +118,7 @@ export default {
     padding: 0 8px;
     height: 100%;
     font-size: 18px;
-    color: #fff;
+    color: #5a5e66;
     vertical-align: text-bottom;
     margin-bottom: 5px;
     &.hover-effect {

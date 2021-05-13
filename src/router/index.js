@@ -15,28 +15,22 @@ import mineRoute from './modules/mine'
 Vue.use(VueRouter)
 
 // 静态路由
-const staticRouteMap = [{
-  path: '/',
-  redirect: '/authSys',
-  meta: {
-    hiddenInMenu: true
-  }
-},
-accountRoute, authSysRoute,
-{
+const staticRouteMap = [
+  accountRoute, authSysRoute,
+  {
   // 跳转到目标地址
-  path: '/redirect',
-  component: InnerLayout,
-  meta: {
-    hiddenInMenu: true
-  },
-  children: [
-    {
-      path: '/redirect/:path(.*)',
-      component: () => import('@/views/redirect/index')
-    }
-  ]
-}
+    path: '/redirect',
+    component: InnerLayout,
+    meta: {
+      hiddenInMenu: true
+    },
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  }
 ]
 
 // 需要通过角色动态控制的路由表
@@ -100,6 +94,8 @@ const filterRouteMap = (routeNames, routeMap) => {
 router.beforeEach((to, from, next) => {
   const token = sessionStorage.getItem('token')
   const outerPaths = ['/account/login', '/account/register', '/account/forget']
+  // 动态修改title
+  document.title = to.meta.title
   // token不存在(说明没登录),但是路由将要进入系统内部，自动跳到登录页面。
   if (!token && !outerPaths.includes(to.path)) {
     next('/account/login')

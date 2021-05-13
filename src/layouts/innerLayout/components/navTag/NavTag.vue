@@ -68,13 +68,13 @@ export default {
           name: route.name,
           noCache: route.meta.noCache
         })
-        this.$store.dispatch('cache/addView', route)
+        this.$store.dispatch('addView', route)
       }
     },
     // 关闭标签
     handleClose (index) {
       // tagList中只有首页时不关闭首页
-      if (this.tagList.length === 1 && this.tagList[0].path === '/authSys/index') return false
+      if (this.tagList.length === 1 && this.tagList[0].path === '/authSys') return false
       const delTag = this.tagList.splice(index, 1)[0]
       // 判断关闭的tag的下一个tag存不存在，存在就跳到下一个tag，不存在就跳到上一个tag。
       const toTag = this.tagList[index] ? this.tagList[index] : this.tagList[index - 1]

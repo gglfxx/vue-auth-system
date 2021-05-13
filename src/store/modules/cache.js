@@ -1,6 +1,5 @@
 
 const cache = {
-  namespace: true,
   state: {
     // 需要缓存的页面
     cacheViews: [],
