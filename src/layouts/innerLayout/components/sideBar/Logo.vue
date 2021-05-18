@@ -32,7 +32,7 @@ export default {
   width: 100%;
   height: 50px;
   line-height: 50px;
-  background-color: #434a50;
+  background-color: $logoBg;
   font-size: 24px;
   color: #fff;
   text-align: center;

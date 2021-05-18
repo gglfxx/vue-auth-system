@@ -145,10 +145,8 @@ export default {
 
 <style lang="scss" scoped>
 .scrollbar-wrap {
-  height: 100%;
-  position: relative;
   overflow: hidden;
-
+  position: relative;
   .scrollbar__content {
     position: absolute;
     top: 0px;

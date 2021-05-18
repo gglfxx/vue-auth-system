@@ -1,5 +1,5 @@
 <template>
-  <div class="side-bar" :class="{'has-logo':showLogo}">
+  <div class="side-bar has-logo">
     <logo v-if="showLogo" :collapse="sideCollapse"/>
     <!-- 侧边导航菜单 -->
     <scrollbar>
@@ -8,7 +8,7 @@
         :collapse="sideCollapse"
         :unique-opened="false"
         router
-        background-color="#545c64"
+        :background-color="variables.menuBg"
         :collapse-transition="false"
         text-color="#fff">
         <menu-item v-for="menu in menuList" :key="menu.path" :config="menu"/>
@@ -22,6 +22,7 @@
 import Scrollbar from '@/components/scrollbar/Scrollbar'
 import Logo from './Logo'
 import MenuItem from './MenuItem'
+import variables from '@/assets/styles/variable.scss'
 
 export default {
   components: {
@@ -44,6 +45,9 @@ export default {
     },
     routeMap () {
       return this.$store.getters.routeMap
+    },
+    variables () {
+      return variables
     },
     activePath () {
       const {
@@ -108,7 +112,7 @@ export default {
 
 <style lang="scss" scoped>
 .side-bar {
-  background-color: #545c64;
+  background-color: $menuBg;
   transition: width 0.28s;
   width: $sideBarWidth !important;
   height: 100%;

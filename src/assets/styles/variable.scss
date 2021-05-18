@@ -13,7 +13,13 @@ $sideBarWidth: 200px;
 
 $sideBarHideWidth: 64px;
 
-$menuBg:#545c64;
+$menuBg:#304156;
+
+$logoBg:#2b2f3a;
+
+$menuText:#bfcbd9;
+$menuActiveText:#409EFF;
+$subMenuActiveText:#f4f4f5;
 
 $menuHover:#263445;
 
@@ -22,3 +28,14 @@ $subMenuActiveText:#f4f4f5;
 $subMenuBg:#1f2d3d;
 
 $subMenuHover:#001528;
+
+:export {
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
+  menuBg: $menuBg;
+  menuHover: $menuHover;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+  sideBarWidth: $sideBarWidth;
+}

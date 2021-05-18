@@ -64,16 +64,7 @@ export default {
     width: 100%;
     overflow-x: hidden;
     margin-left:$sideBarWidth;
-    background-color: #f0f2f5;
-
     .inner-layout__page {
-      position: relative;
-      box-sizing: border-box;
-      height: calc(100vh - 50px);
-      overflow-x: hidden;
-      overflow-y: auto;
-      padding: 1em;
-
       &.with-navtag {
         height: calc(100vh - 90px);
       }

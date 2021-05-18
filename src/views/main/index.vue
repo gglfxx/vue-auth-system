@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="auth-container">
     <panel-group @handleSetLineChartData="handleChangeType" />
     <line-chart :statistic-type="statisticType" />
 
@@ -44,3 +44,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.auth-container {
+  background-color: #f0f2f5;
+  position: relative;
+  box-sizing: border-box;
+  height: calc(100vh - 50px);
+  padding: 1em;
+}
+</style>

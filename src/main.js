@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './plugins/element.js'
+import dayjs from 'dayjs'
 
 // 全局注册的组件、指令、过滤器
 import * as Icon from './icons'
@@ -10,6 +11,10 @@ import * as Icon from './icons'
 import '@/assets/styles/app.scss'
 
 Vue.config.productionTip = false
+
+Object.defineProperty(Vue.prototype, '$dayjs', {
+  value: dayjs
+})
 
 new Vue({
   router,
