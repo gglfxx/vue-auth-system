@@ -11,8 +11,8 @@
       :rules="formRules"
       label-width="70px"
       v-loading="getDetailLoading">
-      <el-form-item label="账号:" prop="account">
-        <el-input v-model="userInfo.account" placeholder="请填写账号" clearable :disabled="id ? true : false"></el-input>
+      <el-form-item label="用户名:" prop="username">
+        <el-input v-model="userInfo.username" placeholder="请填写账号" clearable :disabled="id ? true : false"></el-input>
       </el-form-item>
       <el-form-item label="姓名:" prop="name">
         <el-input v-model="userInfo.name" placeholder="请填写用户姓名" clearable></el-input>

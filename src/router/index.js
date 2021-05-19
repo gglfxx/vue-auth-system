@@ -35,7 +35,14 @@ const staticRouteMap = [
 
 // 需要通过角色动态控制的路由表
 const dynamicRouteMap = [
-  systemRoute, mineRoute
+  systemRoute, mineRoute, {
+    name: '404',
+    path: '*',
+    redirect: '/error-page/404',
+    meta: {
+      hiddenInMenu: true
+    }
+  }
 ]
 
 const createRouter = () => new VueRouter({

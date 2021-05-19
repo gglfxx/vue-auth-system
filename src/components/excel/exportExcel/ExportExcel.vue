@@ -1,18 +1,16 @@
 <template>
   <!--导出excel表格 -->
-  <el-button
-    type="info"
-    icon="el-icon-download"
-    :loading="loading"
-    @click="handleExport">
-    <slot></slot>
+  <el-button v-waves :loading="loading" class="filter-item" type="primary" icon="el-icon-download"
+             @click="handleExport">
+    导出
   </el-button>
 </template>
 
 <script>
 import XLSX from 'xlsx'
-
+import waves from '@/directive/waves'
 export default {
+  directives: { waves },
   props: {
     fileName: {
       type: String,

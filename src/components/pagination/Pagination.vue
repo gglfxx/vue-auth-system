@@ -1,6 +1,6 @@
 <template>
   <!-- 分页 -->
-  <div class="pagination">
+  <div :class="{'hidden':hidden}" class="pagination-container">
     <el-pagination
       :class="`pagination--${position}`"
       :total="total"
@@ -49,6 +49,10 @@ export default {
         return ['left', 'center', 'right'].includes(value)
       },
       default: 'center'
+    },
+    hidden: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -80,45 +84,12 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.pagination {
-  height: 32px;
-
-  &--left {
-    float: left;
-  }
-
-  &--center {
-    text-align: center;
-  }
-
-  &--right {
-    float: right;
-  }
-
-  .el-pagination .el-pager {
-    .number {
-      font-weight: normal;
-      color: $auxiliary-text-color;
-    }
-
-    .el-icon-more {
-      border: none !important;
-    }
-  }
-
-  .el-pagination.is-background .btn-prev,
-  .el-pagination.is-background .btn-next,
-  .el-pagination.is-background .el-pager li {
-    background-color: #fff;
-    border: $base-border;
-    border-radius: 4px;
-  }
-
-  .el-pagination.is-background .el-pager li:not(.disabled).active {
-    border-color: var(--theme);
-    background-color: #fff;
-    color: $auxiliary-text-color;
-  }
+<style scoped>
+.pagination-container {
+  background: #fff;
+  padding: 32px 16px;
+}
+.pagination-container.hidden {
+  display: none;
 }
 </style>

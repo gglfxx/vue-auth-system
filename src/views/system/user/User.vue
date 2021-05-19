@@ -1,14 +1,14 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="queryCondition.name" placeholder="请输入用户名" style="width: 200px;" class="filter-item"
+      <el-input v-model="queryCondition.name" placeholder="请输入姓名" style="width: 200px;" class="filter-item"
                 @keyup.enter.native="handleFilter"/>
-      <el-select v-model="queryCondition.gender" placeholder="请选择性别" clearable style="width: 90px"
+      <el-select v-model="queryCondition.gender" placeholder="性别" clearable style="width: 90px"
                  class="filter-item">
         <el-option v-for="item in tableMng.getTable('gender')" :key="item.id" :label="item.name"
                    :value="item.id"></el-option>
       </el-select>
-      <el-select v-model="queryCondition.roles" style="width: 140px" class="filter-item" @change="handleFilter">
+      <el-select v-model="queryCondition.roles" style="width: 140px" class="filter-item" @change="handleFilter" placeholder="角色">
         <el-option v-for="item in tableMng.getTable('role')" :key="item.id" :label="item.name"
                    :value="item.id"></el-option>
       </el-select>
@@ -19,10 +19,13 @@
                  @click="handleEdit">
         新增
       </el-button>
-      <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download"
-                 @click="handleDownload">
-        导出
-      </el-button>
+      <export-excel
+        file-name="用户数据表"
+        :header="['序号','用户名', '姓名', '性别','手机','邮箱', '角色', '创建时间']"
+        :filter-filed="['index', 'username', 'name','gender', 'mobilePhone', 'email', 'role', 'createDate']"
+        :data="userList">
+        导出表格
+      </export-excel>
     </div>
 
     <el-table
@@ -35,10 +38,22 @@
       style="width: 100%;"
       @sort-change="sortChange"
     >
-      <el-table-column label="序号" prop="id" sortable="custom" align="center" width="80"
-                       :class-name="getSortClass('id')">
+      <el-table-column label="序号" prop="index" sortable="custom" align="center" width="80">
+      </el-table-column>
+      <el-table-column prop="id" v-if="false"></el-table-column>
+      <el-table-column label="用户名" width="150px" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.id }}</span>
+          <span>{{row.username}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="姓名" width="150px" align="center">
+        <template slot-scope="{row}">
+          <span>{{row.name}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="性别" width="80px" align="center">
+        <template slot-scope="{row}">
+          <span>{{ tableMng.getNameById('gender', row.gender) }}</span>
         </template>
       </el-table-column>
       <el-table-column label="手机号" width="150px" align="center">
@@ -46,9 +61,9 @@
           <span>{{row.mobilePhone}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="性别" min-width="150px">
+      <el-table-column label="邮箱" min-width="100px" align="center">
         <template slot-scope="{row}">
-          <span>{{row.gender}}</span>
+          <span>{{row.email}}</span>
         </template>
       </el-table-column>
       <el-table-column label="角色" width="110px" align="center">
@@ -59,14 +74,14 @@
             </span>
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" min-width="150px" sortable>
+      <el-table-column label="创建时间" min-width="120px" sortable>
         <template slot-scope="{row}">
           <span>{{row.createDate}}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)">
+          <el-button type="primary" size="mini" @click="handleEdit(row,$index)">
             编辑
           </el-button>
           <el-button v-if="row.status!='deleted'" size="mini" type="danger" @click="handleDelete(row,$index)">
@@ -94,23 +109,30 @@ import { parseTime } from '@/utils'
 import Pagination from '@/components/pagination/Pagination'
 import { scroll } from '@/utils/core'
 import Edit from './components/Edit'
+import ExportExcel from '@/components/excel/exportExcel'
 
 const users = {
   list: [{
     id: 'b8ec1e25-becc-1ed4-aaac-f61dad843cb9',
     index: 1,
     name: '方丽',
+    username: 'fangli',
     mobilePhone: '18821655620',
     gender: '2',
+    avatar: '',
+    email: '13812345789@139.com',
     roles: ['guest'],
     createDate: '1973-03-21 20:00:53',
     consume: 5551
   }, {
     id: 'a331afeb-53d9-ff1e-e2ce-2dfeb891317c',
     index: 2,
+    username: 'jiangjing',
     name: '蒋静',
     mobilePhone: '18985164343',
     gender: '2',
+    email: '13812345789@139.com',
+    avatar: '',
     roles: ['admin'],
     createDate: '1974-05-26 19:08:13',
     consume: 1731
@@ -119,8 +141,8 @@ const users = {
 }
 
 export default {
-  name: 'ComplexTable',
-  components: { Pagination, Edit },
+  name: 'User',
+  components: { Pagination, Edit, ExportExcel },
   directives: { waves },
   filters: {
     statusFilter (status) {
@@ -190,16 +212,20 @@ export default {
         return {
           id: item.id,
           index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize + index + 1,
+          username: item.username,
           name: item.name,
           mobilePhone: item.mobilePhone,
           gender: item.gender,
           roles: item.roles,
+          email: item.email,
           createDate: this.$dayjs(item.createDate).format('YYYY-MM-DD HH:mm:ss'),
           consume: item.consume
         }
       })
       this.total = data.total
-      this.listLoading = false
+      setTimeout(() => {
+        this.listLoading = false
+      }, 1.5 * 1000)
       const scrollElement = document.querySelector('.inner-layout__page')
       scroll(scrollElement, 0, 800)
     },
@@ -208,7 +234,7 @@ export default {
       this.getUserList()
     },
     // 编辑/新增
-    handleEdit (index, row) {
+    handleEdit (row, index) {
       this.editId = row ? row.id : ''
       this.editVisible = true
     },
@@ -245,7 +271,7 @@ export default {
         type: 'success',
         duration: 2000
       })
-      this.list.splice(index, 1)
+      this.userList.splice(index, 1)
     },
     handleFetchPv (pv) {
       /* fetchPv(pv).then(response => {
