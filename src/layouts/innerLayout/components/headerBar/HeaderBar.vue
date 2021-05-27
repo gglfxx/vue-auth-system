@@ -68,12 +68,13 @@ export default {
 <style lang="scss" scoped>
 .header-bar {
   height: 50px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 1px -1px rgba(0, 0, 0, 0.1);
-  background: #fff;
   overflow: hidden;
   position: relative;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
-  .header-bar__collapse {
+.header-bar__collapse {
     line-height: 46px;
     height: 100%;
     float: left;

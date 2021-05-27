@@ -12,6 +12,12 @@ import '@/assets/styles/app.scss'
 
 Vue.config.productionTip = false
 
+// 模拟数据
+if (process.env.NODE_ENV === 'production') {
+  const { mockXHR } = require('../src/mock')
+  mockXHR()
+}
+
 Object.defineProperty(Vue.prototype, '$dayjs', {
   value: dayjs
 })
