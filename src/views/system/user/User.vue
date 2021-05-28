@@ -103,6 +103,7 @@
 </template>
 
 <script>
+import api from '@/api'
 import waves from '@/directive/waves'
 import tableMng from '@/utils/tableMng'
 import { parseTime } from '@/utils'
@@ -110,35 +111,6 @@ import Pagination from '@/components/pagination/Pagination'
 import { scroll } from '@/utils/core'
 import Edit from './components/Edit'
 import ExportExcel from '@/components/excel/exportExcel'
-
-const users = {
-  list: [{
-    id: 'b8ec1e25-becc-1ed4-aaac-f61dad843cb9',
-    index: 1,
-    name: '方丽',
-    username: 'fangli',
-    mobilePhone: '18821655620',
-    gender: '2',
-    avatar: '',
-    email: '13812345789@139.com',
-    roles: ['guest'],
-    createDate: '1973-03-21 20:00:53',
-    consume: 5551
-  }, {
-    id: 'a331afeb-53d9-ff1e-e2ce-2dfeb891317c',
-    index: 2,
-    username: 'jiangjing',
-    name: '蒋静',
-    mobilePhone: '18985164343',
-    gender: '2',
-    email: '13812345789@139.com',
-    avatar: '',
-    roles: ['admin'],
-    createDate: '1974-05-26 19:08:13',
-    consume: 1731
-  }],
-  total: 2
-}
 
 export default {
   name: 'User',
@@ -206,8 +178,7 @@ export default {
   methods: {
     async getUserList () {
       this.listLoading = true
-      // const data = await api.user.getList(this.queryCondition)
-      const data = users
+      const data = await api.user.getList(this.queryCondition)
       this.userList = data.list.map((item, index) => {
         return {
           id: item.id,

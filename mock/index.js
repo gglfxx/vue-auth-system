@@ -1,17 +1,13 @@
 const Mock = require('mockjs')
 const { param2Obj } = require('./utils')
-
-const user = require('./user')
-const role = require('./role')
-
+const user = require('./modules/user')
 const mocks = [
-  ...user,
-  ...role
+  ...user
 ]
 
 // for front mock
-// please use it cautiously, it will redefine XMLHttpRequest,
-// which will cause many of your third-party libraries to be invalidated(like progress event).
+// 请谨慎使用，它将重新定义XMLHttpRequest,
+// 这将导致许多第三方库失效（如progress事件）.
 function mockXHR () {
   // mock patch
   // https://github.com/nuysoft/Mock/issues/300

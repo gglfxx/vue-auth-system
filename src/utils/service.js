@@ -4,7 +4,7 @@ import store from '@/store'
 
 class Service {
   baseConfig = {
-    baseURL: 'webApi/',
+    baseURL: process.env.VUE_APP_BASE_API,
     headers: {},
     timeout: 8000
   }

@@ -5,7 +5,7 @@
 </template>
 <script>
 import tableMng from '@/utils/tableMng'
-import baseTable from '@/mock/modules/baseTable'
+import baseTable from '../mock/modules/baseTable'
 export default {
   components: {
   },

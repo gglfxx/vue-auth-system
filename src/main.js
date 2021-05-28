@@ -12,9 +12,9 @@ import '@/assets/styles/app.scss'
 
 Vue.config.productionTip = false
 
-// 模拟数据
-if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../src/mock')
+// 开发环境使用模拟数据
+if (process.env.NODE_ENV === 'development') {
+  const { mockXHR } = require('../mock')
   mockXHR()
 }
 
