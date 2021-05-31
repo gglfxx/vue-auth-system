@@ -1,5 +1,5 @@
 const Mock = require('mockjs')
-const { param2Obj } = require('./utils')
+const { param2Obj } = require('@/utils/index')
 const user = require('./modules/user')
 const mocks = [
   ...user
@@ -30,6 +30,7 @@ function mockXHR () {
         const { body, type, url } = options
         result = respond({
           method: type,
+          url: url,
           body: JSON.parse(body),
           query: param2Obj(url)
         })

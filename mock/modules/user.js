@@ -1,12 +1,12 @@
 const Mock = require('mockjs')
-const util = require('util')
 const { getURLParams } = require('@/utils/core')
+const util = require('../util')
 
 // 提醒：module.exports不能与import 一起用
 const userData = Mock.mock({
   'list|127': [{
     id: '@lower(@guid)',
-    username: '@name',
+    username: /^[a-zA-Z0-9_]{5,10}$/,
     name: '@cname',
     mobilePhone: /^1[345789]\d{9}$/,
     gender: '@pick(["1", "2"])',
@@ -14,7 +14,6 @@ const userData = Mock.mock({
     roles: '@pick(["admin", "guest","editor"])'.split(),
     createDate: '@datetime("yyyy-MM-dd HH:mm:ss")',
     consume: '@natural(0,10000)',
-    account: /^[a-zA-Z0-9_]{5,10}$/,
     avatar: 'https://picsum.photos/200/200/?random',
     email: '@email'
   }]
@@ -24,10 +23,10 @@ const table = userData.list
 module.exports = [
   // user getList
   {
-    url: '/user/getList',
+    url: '/user/list',
     type: 'get',
     response: config => {
-      const { name, pageNumber = 1, pageSize = table.length } = getURLParams(config.url)
+      const { name, pageNumber = 1, pageSize = config.query.pageSize } = getURLParams(config.url)
       const result = table.filter(row => {
         let validName = false
         validName = row.name.includes(name)
@@ -38,7 +37,7 @@ module.exports = [
       return {
         code: 200,
         data: {
-          list: util.filterFieldByTable(result.slice(startIndex, endIndex), 'id', 'name', 'mobilePhone', 'gender', 'roles', 'createDate', 'consume', 'age'),
+          list: util.filterFieldByTable(result.slice(startIndex, endIndex), 'id', 'username', 'name', 'mobilePhone', 'gender', 'email', 'roles', 'createDate', 'age'),
           total: result.length
         }
       }
@@ -47,7 +46,7 @@ module.exports = [
 
   // get user info
   {
-    url: '/user/getDetail',
+    url: '/user/detail',
     type: 'get',
     response: config => {
       const { id } = getURLParams(config.url)

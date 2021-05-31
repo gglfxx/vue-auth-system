@@ -15,14 +15,18 @@ const filterFieldByRow = (row, ...fields) => {
   return newRow
 }
 
-const filterFieldByTable = (table, ...fields) => {
+export function filterFieldByTable (table, ...fields) {
   return table.map(row => filterFieldByRow(row, ...fields))
 }
+
+/* const filterFieldByTable = (table, ...fields) => {
+  return table.map(row => filterFieldByRow(row, ...fields))
+} */
 
 /**
  * 新增/修改
  */
-const update = (table, row) => {
+export function update (table, row) {
   if (row.id) {
     const index = table.findIndex(item => item.id === row.id)
     Object.assign(table[index], row)
@@ -36,7 +40,7 @@ const update = (table, row) => {
  * 单个删除/批量删除
  * @param {Array} ids   要删除的项的id组成的数组
  */
-const remove = (table, ids) => {
+export function remove (table, ids) {
   ids.forEach(id => {
     const index = table.findIndex(row => row.id === id)
     table.splice(index, 1)
@@ -46,13 +50,21 @@ const remove = (table, ids) => {
 /**
  * 根据id查找表的某一项
  */
-const find = (table, id) => {
+/* const find = (table, id) => {
+  return table.find(row => row.id === id)
+} */
+/**
+ * 根据id查找表的某一项
+ */
+
+export function find (table, id) {
   return table.find(row => row.id === id)
 }
-export default {
+
+/* export default {
   filterFieldByRow,
   filterFieldByTable,
   update,
   remove,
   find
-}
+} */

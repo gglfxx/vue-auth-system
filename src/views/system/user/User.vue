@@ -189,8 +189,7 @@ export default {
           gender: item.gender,
           roles: item.roles,
           email: item.email,
-          createDate: this.$dayjs(item.createDate).format('YYYY-MM-DD HH:mm:ss'),
-          consume: item.consume
+          createDate: this.$dayjs(item.createDate).format('YYYY-MM-DD HH:mm:ss')
         }
       })
       this.total = data.total
