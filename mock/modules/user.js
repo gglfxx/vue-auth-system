@@ -26,13 +26,13 @@ module.exports = [
     url: '/user/list',
     type: 'get',
     response: config => {
-      const { name, pageNumber = 1, pageSize = config.query.pageSize } = getURLParams(config.url)
+      const { name, page = 1, pageSize = config.query.limit } = getURLParams(config.url)
       const result = table.filter(row => {
         let validName = false
         validName = row.name.includes(name)
         return validName
       })
-      const startIndex = (Number(pageNumber) - 1) * Number(pageSize)
+      const startIndex = (Number(page) - 1) * Number(pageSize)
       const endIndex = startIndex + Number(pageSize)
       return {
         code: 200,

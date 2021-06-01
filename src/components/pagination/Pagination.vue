@@ -5,12 +5,12 @@
       :class="`pagination--${position}`"
       :total="total"
       :current-page.sync="currentPage"
-      :page-size.sync="pageSizeNum"
+      :page-size.sync="pageSize"
       :page-sizes="pageSizes"
       :layout="layout"
       :background="background"
       @size-change="handlePageSizeChange"
-      @current-change="handlePageNumberChange">
+      @current-change="handleCurrentChange">
     </el-pagination>
   </div>
 </template>
@@ -22,18 +22,18 @@ export default {
       required: true,
       type: Number
     },
-    pageNumber: {
+    page: {
       type: Number,
       default: 1
     },
-    pageSize: {
+    limit: {
       type: Number,
-      default: 10
+      default: 20
     },
     pageSizes: {
       type: Array,
       default () {
-        return [10, 20, 30, 50, 1000]
+        return [10, 20, 30, 50, 100]
       }
     },
     layout: {
@@ -58,27 +58,27 @@ export default {
   computed: {
     currentPage: {
       get () {
-        return this.pageNumber
+        return this.page
       },
       set (val) {
-        this.$emit('update:pageNumber', val)
+        this.$emit('update:page', val)
       }
     },
-    pageSizeNum: {
+    pageSize: {
       get () {
-        return this.pageSize
+        return this.limit
       },
       set (val) {
-        this.$emit('update:pageSize', val)
+        this.$emit('update:limit', val)
       }
     }
   },
   methods: {
     handlePageSizeChange (val) {
-      this.$emit('pagination', val)
+      this.$emit('pagination', { page: this.currentPage, limit: val })
     },
-    handlePageNumberChange (val) {
-      this.$emit('pagination', val)
+    handleCurrentChange (val) {
+      this.$emit('pagination', { page: val, limit: this.pageSize })
     }
   }
 }
