@@ -3,26 +3,20 @@ const { getURLParams } = require('@/utils/core')
 const util = require('../util')
 
 // 提醒：module.exports不能与import 一起用
-const userData = Mock.mock({
-  'list|127': [{
+const propData = Mock.mock({
+  'list|50': [{
     id: '@lower(@guid)',
-    username: /[a-z]{6}/,
+    code: /[a-z]{5}/,
     name: '@cname',
-    mobilePhone: /^1[345789]\d{9}$/,
-    gender: '@pick(["1", "2"])',
-    age: '@natural(20,60)',
-    roles: '@pick(["admin", "guest","editor"])'.split(),
-    createDate: '@datetime("yyyy-MM-dd HH:mm:ss")',
-    avatar: 'https://picsum.photos/200/200/?random',
-    email: '@email'
+    sysVal: /[a-z]{6}/,
+    createDate: '@datetime("yyyy-MM-dd HH:mm:ss")'
   }]
 })
-
-const table = userData.list
+const table = propData.list
 module.exports = [
   // user getList
   {
-    url: '/user/list',
+    url: '/config/list',
     type: 'get',
     response: config => {
       const { name, page = 1, pageSize = config.query.limit } = getURLParams(config.url)
@@ -36,7 +30,7 @@ module.exports = [
       return {
         code: 200,
         data: {
-          list: util.filterFieldByTable(result.slice(startIndex, endIndex), 'id', 'username', 'name', 'mobilePhone', 'gender', 'email', 'roles', 'createDate', 'age'),
+          list: util.filterFieldByTable(result.slice(startIndex, endIndex), 'id', 'code', 'name', 'createDate', 'sysVal'),
           total: result.length
         }
       }
@@ -45,7 +39,7 @@ module.exports = [
 
   // get user info
   {
-    url: '/user/detail',
+    url: '/config/detail',
     type: 'get',
     response: config => {
       const { id } = getURLParams(config.url)
@@ -58,7 +52,7 @@ module.exports = [
 
   // user update
   {
-    url: '/user/update',
+    url: '/config/update',
     type: 'post',
     response: config => {
       const { id } = getURLParams(config.url)
@@ -69,7 +63,7 @@ module.exports = [
     }
   },
   {
-    url: '/user/remove',
+    url: '/config/remove',
     type: 'post',
     response: config => {
       const { id } = window.JSON.parse(config.body)

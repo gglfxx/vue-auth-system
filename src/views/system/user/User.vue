@@ -2,17 +2,17 @@
   <div class="app-container">
     <div class="filter-container">
       <el-form :inline="true" :model="queryCondition" class="demo-form-inline" ref="queryCondition">
-        <el-form-item label="姓名">
+        <el-form-item label="姓名" prop="name">
           <el-input v-model="queryCondition.name" placeholder="请输入姓名"></el-input>
         </el-form-item>
-        <el-form-item label="性别">
+        <el-form-item label="性别" prop="gender">
           <el-select v-model="queryCondition.gender" placeholder="性别" clearable style="width: 90px"
                      class="filter-item">
             <el-option v-for="item in tableMng.getTable('gender')" :key="item.id" :label="item.name"
                        :value="item.id"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="角色">
+        <el-form-item label="角色" prop="roles">
           <el-select v-model="queryCondition.roles" style="width: 140px" class="filter-item" @change="handleFilter" placeholder="角色">
             <el-option v-for="item in tableMng.getTable('role')" :key="item.id" :label="item.name"
                        :value="item.id"></el-option>
@@ -22,7 +22,7 @@
           <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
             查询
           </el-button>
-          <el-button v-waves class="filter-item" type="info" icon="el-icon-refresh" @click="handleReset('queryCondition')">
+          <el-button v-waves class="filter-item" type="info" icon="el-icon-refresh" @click="reset('queryCondition')">
             重置
           </el-button>
           <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit"
@@ -187,30 +187,28 @@ export default {
     this.getUserList()
   },
   methods: {
-    getUserList () {
+    async getUserList () {
       this.listLoading = true
-      // const data = await api.user.getList(this.queryCondition)
-      api.user.getList(this.queryCondition).then(response => {
-        this.userList = response.list.map((item, index) => {
-          return {
-            id: item.id,
-            index: (this.queryCondition.page - 1) * this.queryCondition.limit + index + 1,
-            username: item.username,
-            name: item.name,
-            mobilePhone: item.mobilePhone,
-            gender: item.gender,
-            roles: item.roles,
-            email: item.email,
-            createDate: this.$dayjs(item.createDate).format('YYYY-MM-DD HH:mm:ss')
-          }
-        })
-        this.total = response.total
-        setTimeout(() => {
-          this.listLoading = false
-        }, 1.5 * 1000)
-        const scrollElement = document.querySelector('.inner-layout__page')
-        scroll(scrollElement, 0, 800)
+      const data = await api.user.getList(this.queryCondition)
+      this.userList = data.list.map((item, index) => {
+        return {
+          id: item.id,
+          index: (this.queryCondition.page - 1) * this.queryCondition.limit + index + 1,
+          username: item.username,
+          name: item.name,
+          mobilePhone: item.mobilePhone,
+          gender: item.gender,
+          roles: item.roles,
+          email: item.email,
+          createDate: this.$dayjs(item.createDate).format('YYYY-MM-DD HH:mm:ss')
+        }
       })
+      this.total = data.total
+      setTimeout(() => {
+        this.listLoading = false
+      }, 1.5 * 1000)
+      const scrollElement = document.querySelector('.inner-layout__page')
+      scroll(scrollElement, 0, 800)
     },
     sortChange (data) {
       const { prop, order } = data
@@ -232,12 +230,9 @@ export default {
       this.getUserList()
     },
     // 重置
-    handleReset (formName) {
-      /* this.queryCondition.name = ''
-      this.queryCondition.page = 1
-      this.queryCondition.gender = ''
-      this.queryCondition.roles = '' */
+    reset (formName) {
       this.$refs[formName].resetFields()
+      this.queryCondition.page = 1
       this.getUserList()
     },
     // 编辑/新增

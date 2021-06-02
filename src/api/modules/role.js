@@ -1,10 +1,10 @@
 import service from '@/utils/service'
 
 // 权限列表
-export const getRoutes = (data) => service.post('/role/getRoutes', data)
+export const getRoutes = (data) => service.get('/role/getRoutes', data)
 
 // 角色列表
-export const getRoles = (data) => service.post('/role/getRoles', data)
+export const getRoles = (data) => service.get('/role/getRoles', data)
 
 // 新增角色
 export const addRole = (data) => service.post('/role/addRole', data)

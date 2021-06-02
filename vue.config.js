@@ -1,4 +1,5 @@
 const path = require('path')
+const port = process.env.port || process.env.npm_config_port || 9231
 module.exports = {
   chainWebpack: config => {
     const svgRule = config.module.rule('svg')
@@ -28,14 +29,17 @@ module.exports = {
 
     }
 
-  }/* ,
+  },
   devServer: {
     open: true, // 是否自动弹出浏览器页面
-    host: 'localhost',
-    port: '8081',
-    https: false, // 是否使用https协议
-    hotOnly: false, // 是否开启热更新
-    proxy: {
+    port: port,
+    overlay: {
+      warnings: false,
+      errors: true
+    }
+    // https: false, // 是否使用https协议
+    // hotOnly: false, // 是否开启热更新
+    /* proxy: {
       '/api': {
         target: 'http://localhost:18082', // API服务器的地址
         ws: true, // 代理websockets
@@ -44,6 +48,6 @@ module.exports = {
           '^/webApi': ''
         }
       }
-    }
-  } */
+    } */
+  }
 }

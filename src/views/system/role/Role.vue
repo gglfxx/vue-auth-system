@@ -20,7 +20,7 @@
           {{ scope.row.description }}
         </template>
       </el-table-column>
-      <el-table-column align="center" label="操作" width="220">
+      <el-table-column align="center" label="操作" width="300">
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="handleEdit(scope)">
             编辑
@@ -34,6 +34,9 @@
 
     <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'编辑角色':'新建角色'">
       <el-form :model="role" label-width="80px" label-position="left">
+        <el-form-item label="角色编码">
+          <el-input v-model="role.key" placeholder="角色编码"/>
+        </el-form-item>
         <el-form-item label="角色名称">
           <el-input v-model="role.name" placeholder="角色名称"/>
         </el-form-item>
@@ -100,13 +103,13 @@ export default {
   methods: {
     async getRoutes () {
       const res = await api.role.getRoutes()
-      this.serviceRoutes = res.data
-      const routes = this.generateRoutes(res.data)
+      this.serviceRoutes = res
+      const routes = this.generateRoutes(res)
       this.routes = routes
     },
     async getRoles () {
       const res = await api.role.getRoles()
-      this.rolesList = res.data
+      this.rolesList = res
     },
     generateRoutes (routes, basePath = '/') {
       const res = []
@@ -171,8 +174,8 @@ export default {
     },
     handleDelete ({ $index, row }) {
       this.$confirm('确定要删除当前角色?', 'Warning', {
-        confirmButtonText: 'Confirm',
-        cancelButtonText: 'Cancel',
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
         type: 'warning'
       })
         .then(async () => {
@@ -184,7 +187,12 @@ export default {
           })
         })
         .catch(err => {
-          console.error(err)
+          console.log(err)
+          if (err === 'close') {
+            // do something
+          } else if (err === 'cancel') {
+            // do something
+          }
         })
     },
     generateTree (routes, basePath = '/', checkedKeys) {
@@ -206,10 +214,9 @@ export default {
     },
     async confirmRole () {
       const isEdit = this.dialogType === 'edit'
-
       const checkedKeys = this.$refs.tree.getCheckedKeys()
       this.role.routes = this.generateTree(deepClone(this.serviceRoutes), '/', checkedKeys)
-
+      // 编辑
       if (isEdit) {
         await api.role.updateRole(this.role.key, this.role)
         for (let index = 0; index < this.rolesList.length; index++) {
@@ -219,8 +226,8 @@ export default {
           }
         }
       } else {
-        const { data } = await api.role.addRole(this.role)
-        this.role.key = data.key
+        // 新增
+        await api.role.addRole(this.role)
         this.rolesList.push(this.role)
       }
 
