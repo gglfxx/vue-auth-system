@@ -9,6 +9,7 @@ const propData = Mock.mock({
     code: /[a-z]{5}/,
     name: '@cname',
     sysVal: /[a-z]{6}/,
+    description: '',
     createDate: '@datetime("yyyy-MM-dd HH:mm:ss")'
   }]
 })
@@ -30,7 +31,7 @@ module.exports = [
       return {
         code: 200,
         data: {
-          list: util.filterFieldByTable(result.slice(startIndex, endIndex), 'id', 'code', 'name', 'createDate', 'sysVal'),
+          list: util.filterFieldByTable(result.slice(startIndex, endIndex), 'id', 'code', 'name', 'createDate', 'sysVal', 'description'),
           total: result.length
         }
       }
@@ -55,10 +56,10 @@ module.exports = [
     url: '/config/update',
     type: 'post',
     response: config => {
-      const { id } = getURLParams(config.url)
+      const { detail } = config.body
       return {
         code: 200,
-        data: util.find(table, id)
+        data: util.update(table, detail)
       }
     }
   },
@@ -66,7 +67,7 @@ module.exports = [
     url: '/config/remove',
     type: 'post',
     response: config => {
-      const { id } = window.JSON.parse(config.body)
+      const { id } = config.body
       util.remove(table, id)
       return {
         code: 200,

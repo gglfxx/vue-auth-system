@@ -9,10 +9,10 @@
     </el-form-item>
 
     <el-form-item label="角色：">
-      <!--        <el-select v-model="userInfo.roles" multiple disabled placeholder="请选择用户角色">
+      <el-select v-model="user.roles" multiple disabled placeholder="请选择用户角色">
                 <el-option v-for="item in tableMng.getTable('role')" :key="item.id" :label="item.name"
                            :value="item.id"></el-option>
-              </el-select>-->
+              </el-select>
     </el-form-item>
 
     <el-form-item label="性别：" prop="gender">
@@ -49,6 +49,7 @@
 
 <script>
 import AvatarUpload from '@/components/upload/avatarUpload'
+import tableMng from '@/utils/tableMng'
 export default {
   name: 'Mine',
   components: {
@@ -92,6 +93,7 @@ export default {
           trigger: 'blur'
         }]
       },
+      tableMng,
       submitLoading: false
     }
   },

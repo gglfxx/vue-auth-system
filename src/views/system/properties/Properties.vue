@@ -142,6 +142,7 @@ export default {
     async getPropList () {
       this.listLoading = true
       const data = await api.config.getList(this.queryProp)
+      debugger
       this.propList = data.list.map((item, index) => {
         return {
           id: item.id,
@@ -192,13 +193,14 @@ export default {
       this.editVisible = false
     },
     handleDelete (row, index) {
-      this.$notify({
-        title: '成功',
-        message: '删除成功',
-        type: 'success',
-        duration: 2000
-      })
-      this.propList.splice(index, 1)
+      const id = []
+      id.push(row.id)
+      this.$confirm(`确定删除配置：“${row.name}”？`, '提示', { type: 'warning' })
+        .then(async () => {
+          await api.user.remove({ id })
+          this.$message.success('删除成功！')
+          this.getPropList()
+        }).catch(() => {})
     }
   }
 }

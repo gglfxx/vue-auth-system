@@ -10,13 +10,17 @@ const gender = [{
 // 角色
 const role = [{
   id: 'admin',
-  name: '管理员'
+  name: '管理员',
+  description: '超级管理员.有权查看所有页面'
 }, {
   id: 'guest',
-  name: '游客'
+  name: '游客',
+  description: '只是个访客.只能看到主页和文档页'
 }, {
   id: 'editor',
-  name: '编辑'
+  name: '编辑',
+  description: '普通编辑器.可以查看除权限页以外的所有页'
+
 }]
 
 // 地区
